@@ -249,3 +249,19 @@ _Nota 2_: Díganme si tengo permiso de compartir sus memes, de forma anónima, e
 
 ### Solución
 
+PD1: No tengo problema en que compartas mis memes en el grupo de telegram y/o redes sociales. Eso si, no me hago responsable de los daños morales o emocionales que puedan causar.
+
+PD2: Pido perdón, en mi cerebro solo vive [esto](https://www.youtube.com/watch?v=Ika-U2qa9zQ) y [esto](https://www.youtube.com/watch?v=8gFs7Mgj3-g)
+
+<!-- Importamos los memes -->
+![Meme 1](memes/meme1.png)
+
+![Meme 2](memes/meme2.png)
+
+![Meme 3](memes/meme3.png)
+
+![Meme 4](memes/meme4.png)
+
+![Meme 5](memes/meme5.png)
+
+![Meme 6](memes/meme6.png)
