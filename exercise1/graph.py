@@ -70,3 +70,35 @@ class BFS(Busqueda):
     def crear_secuencia(self) -> Cola:
         return Cola()
     
+# Test the classes
+
+# Graph represented as an adjacency list
+grafo: List[List[int]] = [
+    [1, 2],     # 0
+    [0, 3, 4],  # 1
+    [0, 5, 6],  # 2
+    [1],        # 3
+    [1],        # 4
+    [2],        # 5
+    [2]         # 6
+]
+
+# Create a DFS object
+dfs: DFS = DFS(grafo)
+# Create a BFS object
+bfs: BFS = BFS(grafo)
+
+# Test the DFS algorithm
+print(dfs.buscar(0, 6))
+print(dfs.buscar(0, 3))
+print(dfs.buscar(0, 5))
+print(dfs.buscar(0, 4))
+print(dfs.buscar(0, 1))
+print(dfs.buscar(0, 2))
+
+# Test the BFS algorithm
+print(bfs.buscar(0, 6))
+print(bfs.buscar(0, 3))
+print(bfs.buscar(0, 5))
+print(bfs.buscar(0, 4))
+print(bfs.buscar(0, 1))

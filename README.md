@@ -31,6 +31,85 @@ Escoja algún lenguaje de programación de alto nivel, de propósito general y o
 
 ### Solución
 
+Lenguaje escogido: **Python**
+
+#### Descripción del lenguaje
+
+**i.** La forma de crear y manipular objetos en Python es bastante sencilla. Para crear un objeto, simplemente se define una clase y se instancia. Las clases en Python son definidas con la palabra clave `class` seguida del nombre de la clase y dos puntos. Dentro de la clase se definen los métodos y atributos de la clase. Para crear un objeto de una clase, se llama al constructor de la clase, que es el método `__init__` de la clase. Para acceder a los atributos y métodos de un objeto, se utiliza la notación de punto. Por ejemplo, si se tiene un objeto `obj` de la clase `Clase`, se accede al atributo `atributo` con `obj.atributo` y al método `metodo` con `obj.metodo()`. Además, Python dicha instancia se puede crear con o sin paréntesis.
+
+```python
+class Clase:
+    def __init__(self, atributo):
+        self.atributo = atributo
+
+    def metodo(self):
+        return self.atributo
+```
+
+Se instancia de la siguiente manera:
+
+```python
+obj = Clase("Hola")
+print(obj.metodo())  # Imprime "Hola"
+```
+
+**ii.** Python utiliza un recolector de basura para manejar la memoria. El recolector de basura de Python es un algoritmo de conteo de referencias que se encarga de liberar la memoria de los objetos que ya no son referenciados. El recolector de basura de Python es automático y no necesita intervención del programador. Sin embargo, Python también permite la gestión manual de la memoria a través de las funciones `gc.collect()` y `gc.enable()`. Esto permite al programador liberar la memoria de los objetos que ya no son necesarios. Para liberar la memoria de un objeto manualmente, se puede utilizar la función `del`. Para liberar memoria con `gc.collect()`, se debe importar el módulo `gc` de la siguiente manera:
+
+```python
+import gc
+
+# Habilitar el recolector de basura
+gc.enable()
+
+# Recolectar la basura
+gc.collect()
+
+# Liberar memoria de un objeto
+obj = {
+    "clave": "valor"
+}
+del obj
+
+# Liberar memoria de una lista
+lista = [1, 2, 3]
+del lista
+```
+
+**iii.** Python utiliza asociación dinámica de métodos. Esto significa que la resolución de los métodos se realiza en tiempo de ejecución. Python permite la alteración de la elección por defecto de la asociación de métodos mediante la función `super()`. La función `super()` permite acceder a los métodos de la superclase de una clase. Esto es útil cuando se quiere llamar a un método de la superclase desde una subclase. La función `super()` se utiliza de la siguiente manera:
+
+```python
+class SuperClase:
+    def metodo(self):
+        print("Método de la superclase")
+
+class SubClase(SuperClase):
+    def metodo(self):
+        super().metodo()
+        print("Método de la subclase")
+
+obj = SubClase()
+obj.metodo()
+```
+
+**iv.** La jerarquía de tipos en Python es sencilla. Python es un lenguaje de tipado dinámico, lo que significa que las variables no tienen un tipo fijo y pueden cambiar de tipo durante la ejecución del programa. Python no soporta la herencia múltiple directamente, pero se puede simular utilizando la función `super()`. Python soporta el polimorfismo paramétrico a través de los tipos genéricos. Los tipos genéricos permiten definir clases y funciones que pueden trabajar con cualquier tipo de datos. Python soporta la covarianza y la contravarianza. La covarianza permite que un tipo sea reemplazado por un subtipo, mientras que la contravarianza permite que un tipo sea reemplazado por un supertipo. Python no soporta la invarianza, que es la restricción de que un tipo no puede ser reemplazado por otro tipo. 
+
+#### Implementación de los programas
+
+**i.** Definición de la interfaz `Secuencia` y las clases concretas `Pila` y `Cola`:
+
+Para ejecutar dicho código, se debe ejecutar el siguiente comando:
+
+```bash
+./main.sh exe1-b.py
+```
+
+**ii.** Definición del tipo de datos que representa grafos como listas de adyacencias y las clases abstractas `Busqueda`, `DFS` y `BFS`:
+
+Para ejecutar dicho código, se debe ejecutar el siguiente comando:
+
+```bash
+./main.sh exe1-c.py
+```
 
 ## Pregunta 2
 
@@ -137,6 +216,18 @@ Al finalizar la ejecución de cada acción, el programa deberá pedir la siguien
 Investigue herramientas para pruebas unitarias y cobertura en su lenguaje escogido y agregue pruebas a su programa que permitan corroborar su correcto funcionamiento. Como regla general, su programa debería tener una cobertura (de líneas de código y de bifuración) mayor al 80%.
 
 ### Solución
+
+Para ejecutar dicho código, se debe ejecutar el siguiente comando:
+
+```bash
+./main.sh exe3.py
+```
+
+Para realizar las pruebas unitarias y analizar la cobertura de las mismas, se debe ejecutar el siguiente comando:
+
+```bash
+./main.sh exe3-test.py
+```
 
 ## Pregunta 4
 
