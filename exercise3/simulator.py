@@ -161,5 +161,5 @@ class Simulator:
             class_type = class_type.superclass
         # Verify if there are no methods
         if not printed_methods:
-            string_methods = f'La clase {name} no tiene métodos.'
+            string_methods = f'The class {name} has no methods.'
         return string_methods

@@ -172,6 +172,14 @@ Recuerde mostrar paso a paso el estado del programa (la pila de ejecución).
 
 ### Solución
 
+X = 0, Y = 5, Z = 6
+
+#### Asociación estática de métodos
+
+1. Se crea un objeto `e` de la clase `Cafe` y se asigna a la variable `e`. Se define el tipo de `e` como `Bebida`.
+2. Se crea un objeto `pres` de la clase `Marron` y se asigna a la variable `pres`. Se define el tipo de `pres` como `Bebida`.
+3. Se crea un objeto `o` de la clase `Marron` y se asigna a la variable `o`. Se define el tipo de `o` como `Cafe`.
+
 ## Pregunta 3
 
 Se desea que modele e implemente, en el lenguaje de su elección, un manejador de tablas de métodos virtuales para un sistema orientado a objetos con herencia simple y despacho dinámico de métodos:
@@ -220,13 +228,13 @@ Investigue herramientas para pruebas unitarias y cobertura en su lenguaje escogi
 Para ejecutar dicho código, se debe ejecutar el siguiente comando:
 
 ```bash
-./main.sh exe3.py
+./main.sh exe3
 ```
 
 Para realizar las pruebas unitarias y analizar la cobertura de las mismas, se debe ejecutar el siguiente comando:
 
 ```bash
-./main.sh exe3-test.py
+./main.sh exe3-test
 ```
 
 ## Pregunta 4
@@ -325,6 +333,8 @@ what x f (y:ys) = (x, y) : f ys
     _Si sospecha que en algún momento uno de estos programas puede caer en una evaluación recursiva infinita, realice las primeras expansiones, detenga la evaluación y argumente las razones por las que cree que dicha evaluación no terminaría._
 
 ### Solución
+
+<!-- TODO -->
 
 ## Pregunta 5
 
