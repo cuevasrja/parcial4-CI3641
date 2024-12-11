@@ -180,6 +180,50 @@ X = 0, Y = 5, Z = 6
 2. Se crea un objeto `pres` de la clase `Marron` y se asigna a la variable `pres`. Se define el tipo de `pres` como `Bebida`.
 3. Se crea un objeto `o` de la clase `Marron` y se asigna a la variable `o`. Se define el tipo de `o` como `Cafe`.
 
+Indice | Clase | Variable | Valor |
+-------|-------|----------|-------|
+0      | Bebida| a        | 0     |
+1      | Bebida| b        | 5     |
+2      | Marron| c        | 6     |
+
+1. Se llama al método `s` del objeto `e` con el argumento `1`. Se llama al método `s` de la clase `Bebida` con el argumento `1`. Se asigna `a = b + x = 5 + 1 = 6`. Se llama al método `t` de la clase `Bebida` con el argumento `6`. Se retorna `b * y + a = 5 * 6 + 6 = 36`.
+
+2. Se llama al método `s` del objeto `pres` con el argumento `1`. Se llama al método `s` de la clase `Bebida` con el argumento `1`. Se asigna `a = b + x = 5 + 1 = 6`. Se llama al método `t` de la clase `Bebida` con el argumento `6`. Se retorna `b * y + a = 5 * 6 + 6 = 36`.
+
+3. Se llama al método `s` del objeto `o` con el argumento `1`. Se busca el método `s` en la clase `Cafe`, como no se encuentra, se busca en la superclase `Bebida`. Se llama al método `s` de la clase `Bebida` con el argumento `1`. Se asigna `a = b + x = 5 + 1 = 6`. Se llama al método `t` de la clase `Cafe` con el argumento `6`. Retorna `caliente.s(a + b) + y`. Se llama el método `s` en la clase `Bebida` con el argumento `a + b = 6 + 5 = 11`. Se asigna `a = b + x = 5 + 11 = 16`. Se llama al método `t` de la clase `Bebida` con el argumento `16`. Retorna `b * y + a = 5 * 16 + 16 = 96`. Retorna `96 + 6 = 102`.
+
+4. Se imprime `36 + 36 + 102 = 174`.
+
+#### Asociación dinámica de métodos
+
+1. Se crea un objeto `e` de la clase `Cafe` y se asigna a la variable `e`. Se define el tipo de `e` como `Bebida`.
+2. Se crea un objeto `pres` de la clase `Marron` y se asigna a la variable `pres`. Se define el tipo de `pres` como `Bebida`.
+3. Se crea un objeto `o` de la clase `Marron` y se asigna a la variable `o`. Se define el tipo de `o` como `Cafe`.
+
+Indice | Clase | Variable | Valor |
+-------|-------|----------|-------|
+0      | Bebida| a        | 0     |
+1      | Bebida| b        | 5     |
+2      | Marron| c        | 6     |
+
+1. Se llama al método `s` del objeto `e` con el argumento `1`. Se llama al método `s` de la clase `Bebida` con el argumento `1`. Se asigna `a = b + x = 5 + 1 = 6`. Se llama al método `t` de la clase `Cafe` con el argumento `6`. Se retorna `caliente.s(a + b) + y`. Se llama el método `s` en la clase `Marron` con el argumento `a + b = 6 + 5 = 11`. 
+    1.1 Se asigna `a = c + x - 2 = 6 + 11 - 2 = 15`.
+    1.2 Se asigna `c = a + b * x = 15 + 5 * 11 = 70`.
+    1.3 Se llama al método `t` de la clase `Marron` con el argumento `a * b + c = 15 * 5 + 70 = 145`. Se retorna `c - y = 70 - 145 = -75`.
+    1.4 Se retorna `-75`.
+2. Se retorna `caliente.s(a + b) + y = -75 + 6 = -69`.
+3. Se llama al método `s` del objeto `pres` con el argumento `1`. Se llama al método `s` de la clase `Marron` con el argumento `1`. Se asigna `a = c + x - 2 = 6 + 1 - 2 = 5`. Se asigna `c = a + b * x = 5 + 5 * 1 = 10`. Se llama al método `t` de la clase `Marron` con el argumento `a * b + c = 5 * 5 + 10 = 35`. Se retorna `c - y = 10 - 35 = -25`.
+    3.1 Se asigna `a = c + x - 2 = 10 + 1 - 2 = 9`.
+    3.2 Se asigna `c = a + b * x = 9 + 5 * 1 = 14`.
+    3.3 Se llama al método `t` de la clase `Marron` con el argumento `a * b + c = 9 * 5 + 14 = 59`. Se retorna `c - y = 14 - 59 = -45`.
+    3.4 Se retorna `-45`.
+4. Se llama al método `s` del objeto `o` con el argumento `1`. Se llama al método `s` de la clase `Marron` con el argumento `1`. Se asigna `a = c + x - 2 = 6 + 1 - 2 = 5`. Se asigna `c = a + b * x = 5 + 5 * 1 = 10`. Se llama al método `t` de la clase `Marron` con el argumento `a * b + c = 5 * 5 + 10 = 35`. Se retorna `c - y = 10 - 35 = -25`.
+    4.1 Se asigna `a = c + x - 2 = 10 + 1 - 2 = 9`.
+    4.2 Se asigna `c = a + b * x = 9 + 5 * 1 = 14`.
+    4.3 Se llama al método `t` de la clase `Marron` con el argumento `a * b + c = 9 * 5 + 14 = 59`. Se retorna `c - y = 14 - 59 = -45`.
+    4.4 Se retorna `-45`.
+5. Se imprime `- 75 - 45 - 45 = -165`.
+
 ## Pregunta 3
 
 Se desea que modele e implemente, en el lenguaje de su elección, un manejador de tablas de métodos virtuales para un sistema orientado a objetos con herencia simple y despacho dinámico de métodos:
