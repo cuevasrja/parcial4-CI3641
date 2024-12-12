@@ -378,7 +378,113 @@ what x f (y:ys) = (x, y) : f ys
 
 ### Solución
 
-<!-- TODO -->
+#### Pregunta 4.1
+
+##### Orden de evaluación normal
+
+1. Expansión inicial:
+
+```
+misteriosa "abc" (gen 1)
+= foldr what (const []) "abc" (gen 1)
+```
+
+2. Aplicando foldr:
+
+```
+= what "a" (foldr what (const []) "bc" (gen 2)) : (const []) (gen 1)
+```
+
+3. Simplificando const []:
+
+```
+= what "a" (foldr what (const []) "bc" (gen 2)) : []
+```
+
+4. Continuando con foldr:
+
+```
+= what "a" (what "b" (foldr what (const []) "c" (gen 3)) : []) : []
+```
+
+Podemos ver que la estructura se repite en cada paso: estamos construyendo una lista de pares, donde el primer elemento es cada caracter de "abc" y el segundo elemento es una lista cada vez más larga generada por gen.
+
+La evaluación no terminará. Esto se debe a que gen produce una lista infinita. En cada paso de la aplicación de foldr, se genera una nueva llamada a gen con un número incrementado, lo que lleva a una expansión infinita de la lista.
+
+**Razones para la Evaluación Infinita:**
+- Lista infinita: gen produce una lista infinita de números.
+- Recursión infinita implícita: Aunque foldr está diseñada para ser una función de plegado, en este caso, debido a la naturaleza de gen, se desencadena una recursión infinita.
+- Acumulación continua: En cada paso, se agrega un nuevo par a la lista resultante, sin una condición de parada clara.
+
+##### Orden de evaluación aplicativo
+
+Dado que el lenguaje tiene orden de evaluación aplicativo, las funciones se aplican a sus argumentos antes de evaluar otros sub-expresiones.
+
+```
+misteriosa "abc" (gen 1)
+= foldr what (const []) "abc" (gen 1)  -- Expandiendo misteriosa
+= what 'a' (foldr what (const []) "bc" (gen 1))  -- Expandiendo foldr
+= ('a', 1) : foldr what (const []) "bc" (gen 1)  -- Expandiendo what
+= ('a', 1) : what 'b' (foldr what (const []) "c" (gen 1))  -- Expandiendo foldr
+= ('a', 1) : ('b', 2) : foldr what (const []) "c" (gen 1)  -- Expandiendo what
+= ('a', 1) : ('b', 2) : ('c', 3) : foldr what (const []) "" (gen 1)  -- Expandiendo what
+= ('a', 1) : ('b', 2) : ('c', 3) : (const []) (gen 1)  -- Expandiendo foldr con lista vacía
+= ('a', 1) : ('b', 2) : ('c', 3) : []  -- Expandiendo const
+= [('a', 1), ('b', 2), ('c', 3)]  -- Simplificando
+```
+
+La expresión misteriosa "abc" (gen 1) evalúa a la lista [('a', 1), ('b', 2), ('c', 3)]. Lo que hace misteriosa es tomar una cadena y una lista de números, y crear una lista de pares donde el primer elemento es un carácter de la cadena y el segundo es un número de la lista.
+
+Si en lugar de gen 1, utilizáramos gen 1 en un contexto donde la evaluación no se detiene (por ejemplo, dentro de un bucle infinito), la evaluación de misteriosa tampoco terminaría. Esto se debe a que gen genera una lista infinita, y foldr intentaría procesar cada elemento de esa lista.
+
+
+#### Pregunta 4.2
+
+```haskell
+foldA :: (a-> b-> b-> b)-> b-> Arbol a-> b
+foldA f e Hoja = e
+foldA f e (Rama x i d) = f x (foldA f e i) (foldA f e d)
+```
+
+#### Pregunta 4.3
+
+##### Orden de evaluación normal
+
+Dado que el lenguaje tiene orden de evaluación normal, los argumentos de una función se evalúan antes de que se aplique la función.
+
+```
+sospechosa arbolito (genA 1)
+= foldA whatTF (const Hoja) arbolito (genA 1)  -- Expandiendo sospechosa
+= whatTF 'a' (foldA whatTF (const Hoja) (Rama 'b' Hoja (Rama 'c' Hoja Hoja))) (foldA whatTF (const Hoja) (genA 1))  -- Expandiendo foldA
+= Rama ('a', 1) (foldA whatTF (const Hoja) (Rama 'b' Hoja (Rama 'c' Hoja Hoja))) (foldA whatTF (const Hoja) (genA 2))  -- Expandiendo whatTF
+```
+
+Si continuamos la evaluación, notaremos que cada aplicación de foldA a genA generará dos nuevas llamadas a foldA con árboles aún más grandes. Esto se debe a la naturaleza recursiva de genA, que produce un árbol infinito.
+
+**Razones para la Evaluación Infinita**
+- Árbol Infinito: genA genera un árbol infinitamente profundo.
+- Recursión Infinita: Cada aplicación de foldA a genA genera dos nuevas llamadas a foldA, lo que lleva a una expansión recursiva sin fin.
+
+La evaluación de sospechosa arbolito (genA 1) no terminará debido a la naturaleza infinita del árbol generado por genA. A pesar de que hemos visto las primeras etapas de la evaluación, la recursión se profundizará indefinidamente sin alcanzar un caso base.
+
+##### Orden de evaluación aplicativo
+
+```
+sospechosa arbolito (genA 1)
+= foldA whatTF (const Hoja) arbolito (genA 1)  -- Expandiendo sospechosa
+= whatTF 'a' (foldA whatTF (const Hoja) (Rama 'b' Hoja (Rama 'c' Hoja Hoja))) (foldA whatTF (const Hoja) (genA 1))  -- Expandiendo foldA
+= Rama ('a', 1)  -- ... (expansión continua)
+```
+
+**Análisis de la Evaluación**
+- Crecimiento Exponencial del Árbol: El árbol generado por genA crece exponencialmente.
+- Aplicación Infinita de foldA: Cada llamada a foldA genera dos nuevas llamadas recursivas, una para el subárbol izquierdo y otra para el derecho.
+- No Terminación: Debido al crecimiento exponencial del árbol generado por genA y la naturaleza recursiva de foldA, la evaluación nunca llegará a un caso base.
+
+**Razones para la Evaluación Infinita**
+- Árbol Infinito: genA produce un árbol infinitamente profundo.
+- Recursión Infinita: foldA se llama recursivamente para cada nodo del árbol, sin un caso base claro para detener la recursión en el contexto del árbol infinito.
+- Crecimiento Exponencial de Llamadas: El número de llamadas a foldA crece exponencialmente con la profundidad del árbol, lo que exacerba el problema de no terminación.
 
 ## Pregunta 5
 
