@@ -75,39 +75,43 @@ class Cola(Secuencia):
         if self.vacio():
             raise ValueError("La cola está vacía")
         return self.Lista.pop(0)
-    
-# Test the classes
 
-# Create a stack
-pila = Pila()
-assert pila.vacio()
-pila.agregar(1)
-assert not pila.vacio()
-pila.agregar(2)
-assert not pila.vacio()
-pila.agregar(3)
-assert not pila.vacio()
-assert pila.remover() == 3
-assert not pila.vacio()
-assert pila.remover() == 2
-assert not pila.vacio()
-assert pila.remover() == 1
-assert pila.vacio()
+def main():
+    # Test the classes
 
-# Create a queue
-cola = Cola()
-assert cola.vacio()
-cola.agregar(1)
-assert not cola.vacio()
-cola.agregar(2)
-assert not cola.vacio()
-cola.agregar(3)
-assert not cola.vacio()
-assert cola.remover() == 1
-assert not cola.vacio()
-assert cola.remover() == 2
-assert not cola.vacio()
-assert cola.remover() == 3
-assert cola.vacio()
+    # Create a stack
+    pila = Pila()
+    assert pila.vacio()
+    pila.agregar(1)
+    assert not pila.vacio()
+    pila.agregar(2)
+    assert not pila.vacio()
+    pila.agregar(3)
+    assert not pila.vacio()
+    assert pila.remover() == 3
+    assert not pila.vacio()
+    assert pila.remover() == 2
+    assert not pila.vacio()
+    assert pila.remover() == 1
+    assert pila.vacio()
 
-print("All tests passed!")
+    # Create a queue
+    cola = Cola()
+    assert cola.vacio()
+    cola.agregar(1)
+    assert not cola.vacio()
+    cola.agregar(2)
+    assert not cola.vacio()
+    cola.agregar(3)
+    assert not cola.vacio()
+    assert cola.remover() == 1
+    assert not cola.vacio()
+    assert cola.remover() == 2
+    assert not cola.vacio()
+    assert cola.remover() == 3
+    assert cola.vacio()
+
+    print("All tests passed!")
+
+if __name__ == "__main__":
+    main()
